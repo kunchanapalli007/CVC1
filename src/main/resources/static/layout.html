@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cincinnati Volleyball Club</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                cvcOrange: '#f26522',
+                cvcDark: '#111111',
+              }
+            }
+          }
+        }
+    </script>
+    <style>
+        .mobile-nav { display: none; }
+        @media (max-width: 768px) {
+          .desktop-nav { display: none; }
+          .mobile-nav { display: block; }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+<!-- 🧭 NAVBAR -->
+<header class="bg-cvcDark text-white sticky top-0 z-50 shadow-md">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-cvcOrange">🏐 CVC</h1>
+
+        <!-- Desktop Nav -->
+        <nav class="space-x-4 hidden sm:flex desktop-nav">
+            <a href="index.html" class="hover:text-cvcOrange">Home</a>
+            <a href="teams.html" class="hover:text-cvcOrange">Teams</a>
+            <a href="players.html" class="hover:text-cvcOrange">Players</a>
+            <a href="events.html" class="hover:text-cvcOrange">Events</a>
+            <a href="contact.html" class="hover:text-cvcOrange">Contact</a>
+        </nav>
+
+        <!-- Mobile Toggle -->
+        <button id="navToggle" class="sm:hidden text-white text-xl">&#9776;</button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-nav bg-cvcDark text-center py-4 hidden">
+        <a href="index.html" class="block py-2 hover:text-cvcOrange">Home</a>
+        <a href="teams.html" class="block py-2 hover:text-cvcOrange">Teams</a>
+        <a href="players.html" class="block py-2 hover:text-cvcOrange">Players</a>
+        <a href="events.html" class="block py-2 hover:text-cvcOrange">Events</a>
+        <a href="contact.html" class="block py-2 hover:text-cvcOrange">Contact</a>
+    </div>
+</header>
+
+<!-- 📄 PAGE CONTENT (Inject here in all other pages) -->
+<main class="container mx-auto px-4 py-8 min-h-[70vh]">
+    <!-- INSERT PAGE-SPECIFIC CONTENT HERE -->
+</main>
+
+<!-- 🦶 FOOTER -->
+<footer class="bg-cvcDark text-white text-center py-6 text-sm">
+    &copy; 2025 Cincinnati Volleyball Club. All rights reserved.
+</footer>
+
+<!-- 📜 JS for Mobile Nav -->
+<script>
+    const navToggle = document.getElementById('navToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    navToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+</script>
+
+</body>
+</html>

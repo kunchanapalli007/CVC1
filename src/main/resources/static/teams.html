@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Teams | Cincinnati Volleyball Club</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                cvcOrange: '#f26522',
+                cvcDark: '#111111',
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+<!-- 🧭 Navbar -->
+<header class="bg-cvcDark text-white sticky top-0 z-50 shadow-md">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-cvcOrange">🏐 CVC Teams</h1>
+
+        <!-- Desktop Nav -->
+        <nav class="space-x-4 hidden md:flex">
+            <a href="index.html" class="hover:text-cvcOrange">Home</a>
+            <a href="players.html" class="hover:text-cvcOrange">Players</a>
+            <a href="events.html" class="hover:text-cvcOrange">Events</a>
+            <a href="contact.html" class="hover:text-cvcOrange">Contact</a>
+        </nav>
+
+        <!-- Mobile Menu Toggle -->
+        <div class="md:hidden">
+            <button id="menu-toggle" class="text-cvcOrange text-xl">☰</button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-cvcDark text-white">
+        <a href="index.html" class="block px-4 py-2">Home</a>
+        <a href="players.html" class="block px-4 py-2">Players</a>
+        <a href="events.html" class="block px-4 py-2">Events</a>
+        <a href="contact.html" class="block px-4 py-2">Contact</a>
+    </div>
+</header>
+
+<!-- 📄 Hero Section -->
+<section class="bg-cvcOrange text-white text-center py-10">
+    <h2 class="text-3xl font-bold">Our Teams</h2>
+    <p class="text-lg mt-2">View and manage all registered teams</p>
+</section>
+
+<!-- 📂 Main Section -->
+<main class="container mx-auto px-4 py-12">
+
+    <!-- 🏆 Team Header -->
+    <div class="flex justify-between items-center mb-8">
+        <h2 class="text-xl font-semibold text-cvcDark">Team List</h2>
+        <button onclick="showForm()" class="bg-cvcOrange text-white px-4 py-2 rounded hover:bg-orange-700 transition shadow-md">+ Add Team</button>
+    </div>
+
+    <!-- 🏅 Team Cards -->
+    <div id="team-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Injected by JS -->
+    </div>
+
+    <!-- ➕ Add Team Form -->
+    <div id="team-form" class="mt-12 bg-white p-6 border border-cvcOrange rounded shadow-md hidden">
+        <h3 class="text-lg font-bold text-cvcOrange mb-4">➕ Add New Team</h3>
+        <form onsubmit="submitTeam(event)">
+            <input type="text" id="teamName" placeholder="Team Name" class="block w-full mb-3 border px-4 py-2 rounded" required />
+            <input type="text" id="coachName" placeholder="Coach Name" class="block w-full mb-3 border px-4 py-2 rounded" required />
+            <input type="text" id="ageGroup" placeholder="Age Group (e.g. U18)" class="block w-full mb-4 border px-4 py-2 rounded" required />
+            <button type="submit" class="bg-cvcOrange text-white px-6 py-2 rounded hover:bg-orange-700 transition w-full font-semibold">Save Team</button>
+        </form>
+    </div>
+
+</main>
+
+<!-- 🦶 Footer -->
+<footer class="bg-cvcDark text-white text-center py-6 text-sm">
+    &copy; 2025 Cincinnati Volleyball Club. All rights reserved.
+</footer>
+
+<script>
+    // Menu Toggle Functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuToggle = document.getElementById("menu-toggle");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+    });
+
+    // Show/Hide Add Team Form
+    function showForm() {
+        const form = document.getElementById("team-form");
+        form.classList.toggle("hidden");
+    }
+
+    // Load teams from the API
+    async function loadTeams() {
+      const API_URL = "http://localhost:8080/api/teams"; // Backend endpoint
+      try {
+        const response = await fetch(API_URL);
+        const teams = await response.json();
+        renderTeams(teams);
+      } catch (error) {
+        console.error("Error loading teams:", error);
+      }
+    }
+
+    // Render the team cards
+    function renderTeams(teams) {
+      const container = document.getElementById("team-list");
+      container.innerHTML = "";
+
+      teams.forEach((team) => {
+        const card = document.createElement("div");
+        card.className = "bg-white shadow-md rounded p-4 border hover:shadow-lg transition";
+
+        card.innerHTML = `
+          <h3 class="text-lg font-semibold text-blue-700">${team.name}</h3>
+          <p class="mt-2 text-sm"><strong>Coach:</strong> ${team.coach}</p>
+          <p class="text-sm"><strong>Age Group:</strong> ${team.ageGroup}</p>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    // Submit new team to backend
+    async function submitTeam(event) {
+      event.preventDefault();
+      const name = document.getElementById("teamName").value;
+      const coach = document.getElementById("coachName").value;
+      const ageGroup = document.getElementById("ageGroup").value;
+
+      const team = { name, coach, ageGroup };
+
+      try {
+        const response = await fetch("http://localhost:8080/api/teams", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(team),
+        });
+
+        if (response.ok) {
+          document.getElementById("team-form").classList.add("hidden");
+          loadTeams(); // Refresh team list
+        } else {
+          console.error("Failed to save team:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error saving team:", error);
+      }
+    }
+
+    // Load teams when the page loads
+    document.addEventListener("DOMContentLoaded", () => {
+        loadTeams();
+    });
+</script>
+
+</body>
+</html>

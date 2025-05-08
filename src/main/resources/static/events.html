@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Events | Cincinnati Volleyball Club</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                cvcOrange: '#f26522',
+                cvcDark: '#111111',
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+<!-- Header -->
+<header class="bg-cvcDark text-white sticky top-0 z-50 shadow-md">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-cvcOrange">🏐 CVC Events</h1>
+        <nav class="space-x-4 hidden md:flex">
+            <a href="index.html" class="hover:text-cvcOrange">Home</a>
+            <a href="teams.html" class="hover:text-cvcOrange">Teams</a>
+            <a href="players.html" class="hover:text-cvcOrange">Players</a>
+            <a href="contact.html" class="hover:text-cvcOrange">Contact</a>
+        </nav>
+        <!-- Mobile Menu Toggle -->
+        <div class="md:hidden">
+            <button id="menu-toggle" class="text-cvcOrange">☰</button>
+        </div>
+    </div>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="md:hidden hidden bg-cvcDark text-white">
+        <a href="index.html" class="block px-4 py-2">Home</a>
+        <a href="teams.html" class="block px-4 py-2">Teams</a>
+        <a href="players.html" class="block px-4 py-2">Players</a>
+        <a href="contact.html" class="block px-4 py-2">Contact</a>
+    </div>
+</header>
+
+<!-- Section Heading -->
+<section class="bg-cvcOrange text-white text-center py-10">
+    <h2 class="text-3xl font-bold">🏆 Upcoming Tournaments & Matches</h2>
+    <p class="text-lg mt-2">Stay updated on exciting volleyball events!</p>
+</section>
+
+<!-- Event List -->
+<main class="container mx-auto px-4 py-10">
+
+    <div id="event-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <!-- JS will render events here -->
+    </div>
+
+    <!-- Add New Event -->
+    <div class="bg-white border border-cvcOrange p-6 rounded shadow-md">
+        <h3 class="text-xl font-bold text-cvcOrange mb-4">📅 Add New Event</h3>
+
+        <form onsubmit="submitEvent(event)">
+            <input type="text" id="eventTitle" placeholder="Event Title" class="w-full mb-3 border px-4 py-2 rounded" required />
+            <input type="text" id="eventLocation" placeholder="Location" class="w-full mb-3 border px-4 py-2 rounded" required />
+            <input type="datetime-local" id="eventDateTime" class="w-full mb-3 border px-4 py-2 rounded" required />
+
+            <select id="team1Select" class="w-full mb-3 border px-4 py-2 rounded" required>
+                <option value="">-- Select Team 1 --</option>
+            </select>
+
+            <select id="team2Select" class="w-full mb-3 border px-4 py-2 rounded" required>
+                <option value="">-- Select Team 2 --</option>
+            </select>
+
+            <select id="eventType" class="w-full mb-3 border px-4 py-2 rounded" required>
+                <option value="">-- Select Type --</option>
+                <option value="Match">Match</option>
+                <option value="Tournament">Tournament</option>
+            </select>
+
+            <input type="text" id="eventResult" placeholder="Result (Optional)" class="w-full mb-4 border px-4 py-2 rounded" />
+
+            <button type="submit" class="bg-cvcOrange hover:bg-orange-700 text-white px-6 py-2 rounded transition w-full font-semibold">
+                Save Event
+            </button>
+        </form>
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-cvcDark text-white text-center py-6 text-sm mt-10">
+    &copy; 2025 Cincinnati Volleyball Club. All rights reserved.
+</footer>
+
+<script src="js/events.js"></script>
+
+<!-- Mobile Menu Toggle Script -->
+<script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+    });
+</script>
+
+</body>
+</html>

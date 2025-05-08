@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cincinnati Volleyball Club | Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                cvcOrange: '#f26522',
+                cvcDark: '#111111',
+              }
+            }
+          }
+        }
+    </script>
+    <style>
+        @keyframes scroll-sponsors {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+
+        .animate-scroll-sponsors {
+          display: flex;
+          animation: scroll-sponsors 20s linear infinite;
+          width: calc(200px * 8); /* Double the width for seamless looping */
+        }
+
+        .sponsor {
+          min-width: 200px;
+          margin-right: 2rem;
+          flex-shrink: 0;
+        }
+
+        .sponsor img {
+          width: 100%;
+          height: auto;
+          max-height: 80px;
+          object-fit: contain;
+          filter: grayscale(100%);
+          transition: filter 0.3s;
+        }
+
+        .sponsor img:hover {
+          filter: grayscale(0%);
+        }
+
+        /* Video background */
+        .video-background {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: -1;
+          overflow: hidden;
+        }
+
+        .video-background video {
+          min-width: 100%;
+          min-height: 100%;
+          object-fit: cover;
+        }
+
+        .content-overlay {
+          position: relative;
+          background-color: rgba(0, 0, 0, 0.7);
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+        }
+
+        /* Tournament heading */
+        .tournament-heading {
+          font-size: 3rem;
+          line-height: 1;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 768px) {
+          .tournament-heading {
+            font-size: 2.25rem;
+            line-height: 1.2;
+          }
+
+          .sponsor {
+            min-width: 150px;
+            margin-right: 1rem;
+          }
+
+          .animate-scroll-sponsors {
+            width: calc(150px * 8);
+          }
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+          display: none;
+          background-color: rgba(17, 17, 17, 0.95);
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          padding: 1rem;
+          z-index: 100;
+        }
+
+        .mobile-menu.active {
+          display: block;
+        }
+
+        .mobile-menu a {
+          display: block;
+          padding: 0.75rem;
+          color: white;
+          text-decoration: none;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .mobile-menu a:hover {
+          background-color: rgba(242, 101, 34, 0.2);
+        }
+
+        #menu-toggle {
+          background: none;
+          border: none;
+          color: #f26522;
+          font-size: 1.5rem;
+          cursor: pointer;
+          padding: 0.5rem;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800">
+
+<!-- Fixed Video Background -->
+<div class="video-background">
+    <video autoplay loop muted playsinline>
+        <source src="vid.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<!-- Main Content -->
+<div class="content-overlay">
+
+    <!-- Navbar -->
+    <header class="bg-cvcDark text-white sticky top-0 z-50 shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold text-cvcOrange">🏐 CVC</h1>
+            <nav class="desktop-menu space-x-4 hidden md:flex">
+                <a href="index.html" class="text-white hover:text-cvcOrange">Home</a>
+                <a href="teams.html" class="text-white hover:text-cvcOrange">Teams</a>
+                <a href="players.html" class="text-white hover:text-cvcOrange">Players</a>
+                <a href="events.html" class="text-white hover:text-cvcOrange">Events</a>
+                <a href="about.html" class="text-white hover:text-cvcOrange">About</a>
+                <a href="contact.html" class="text-white hover:text-cvcOrange">Contact</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="text-cvcOrange">☰</button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu">
+            <a href="index.html">Home</a>
+            <a href="teams.html">Teams</a>
+            <a href="players.html">Players</a>
+            <a href="events.html">Events</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="flex-1 flex flex-col justify-center items-center text-center px-4 py-12">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="tournament-heading font-extrabold mb-6 text-cvcOrange">
+                <span class="block">VOLLEYBALL</span>
+                <span class="block">TOURNAMENT</span>
+            </h2>
+            <p class="text-xl md:text-2xl mb-8 text-white">Saturday, May 17, 2025 • 8:00 AM</p>
+            <a href="register.html" class="inline-block bg-cvcOrange hover:bg-orange-700 text-white px-8 py-4 rounded-lg text-lg md:text-xl transition shadow-lg transform hover:scale-105">Register Now</a>
+        </div>
+    </section>
+
+    <!-- Info Block -->
+    <section class=" text-white py-8 ">
+        <div class="container mx-auto px-4 text-center space-y-3">
+            <p class="text-lg md:text-xl font-semibold">🏐 Venue: Sports Express, Mason, OH</p>
+            <p class="text-lg md:text-xl font-semibold">🥤 Food & Drinks Provided</p>
+            <p class="text-lg md:text-xl">Welcome Party: May 16 @ 5:00 PM</p>
+        </div>
+    </section>
+
+    <!-- Sponsors Section -->
+    <section class="py-16 ">
+        <div class="container mx-auto px-4 text-center">
+            <h3 class="text-3xl font-bold text-cvcDark mb-12">Our Sponsors</h3>
+            <div class="relative max-w-6xl mx-auto overflow-hidden">
+                <div class="py-4">
+                    <div id="sponsor-carousel" class="animate-scroll-sponsors">
+                        <!-- Duplicate sponsors for seamless looping -->
+                        <div class="sponsor">
+                            <img src="benz.png" alt="Mercedes-Benz" />
+                        </div>
+                        <div class="sponsor">
+                            <img src="bmw.png" alt="BMW" />
+                        </div>
+                        <div class="sponsor">
+                            <img src="hondaS.png" alt="Honda" />
+                        </div>
+                        <div class="sponsor">
+                            <img src="toyota.png" alt="Toyota" />
+                        </div>
+                        <!-- Duplicates -->
+                        <div class="sponsor">
+                            <img src="benz.png" alt="Mercedes-Benz" />
+                        </div>
+                        <div class="sponsor">
+                            <img src="bmw.png" alt="BMW" />
+                        </div>
+                        <div class="sponsor">
+                            <img src="hondaS.png" alt="Honda" />
+                        </div>
+                        <div class="sponsor">
+                            <img src="toyota.png" alt="Toyota" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-cvcDark text-center py-8 text-white">
+        <div class="container mx-auto px-4">
+            <p class="text-lg">&copy; 2025 Cincinnati Volleyball Club</p>
+        </div>
+    </footer>
+
+</div>
+
+<script>
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuToggle.addEventListener("click", () => {
+        mobileMenu.classList.toggle("active");
+    });
+
+    // Pause video when mobile menu is open to save resources
+    const video = document.querySelector('video');
+    menuToggle.addEventListener('click', () => {
+        if (mobileMenu.classList.contains('active')) {
+            video.pause();
+        } else {
+            video.play();
+        }
+    });
+</script>
+
+</body>
+</html>
