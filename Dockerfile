@@ -1,14 +1,4 @@
-# Start from the official OpenJDK 17 base image
-FROM openjdk:17-jdk-slim
-
-# Set working directory in container
-WORKDIR /app
-
-# Copy the built jar file into the container
-COPY target/*.jar app.jar
-
-# Expose the app's port
-EXPOSE 8080
-
-# Run the jar file
-ENTRYPOINT ["java", "-jar", "app.jar"]
+FROM eclipse-temurin:17-jdk-jammy
+VOLUME /tmp
+COPY target/cvc-backend-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java", "-jar", "/app.jar"]

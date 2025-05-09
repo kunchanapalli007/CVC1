@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: ${SPRING_DATASOURCE_URL}
-    username: ${SPRING_DATASOURCE_USERNAME}
-    password: ${SPRING_DATASOURCE_PASSWORD}
+    url: jdbc:postgresql://dpg-d0erjmk9c44c738cosg0-a.oregon-postgres.render.com:5432/cvc_web
+    username: cvc_web_user
+    password: 6Xv7BPMRFpiwA2n9TwIxXjqYbF5NVHrA
   jpa:
     hibernate:
       ddl-auto: update
