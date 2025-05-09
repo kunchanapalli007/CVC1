@@ -1,8 +1,11 @@
 package com.cvc.cvc_backend.controller;
 
 import com.cvc.cvc_backend.model.Team;
-import com.cvc.cvc_backend.service.TeamService;
-import org.springframework.web.bind.annotation.*;
+import com.cvc.cvc_backend.repository.TeamRepository;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -11,19 +14,14 @@ import java.util.List;
 @CrossOrigin(origins = "*")
 public class TeamController {
 
-    private final TeamService teamService;
+    private final TeamRepository teamRepository;
 
-    public TeamController(TeamService teamService) {
-        this.teamService = teamService;
+    public TeamController(TeamRepository teamRepository) {
+        this.teamRepository = teamRepository;
     }
 
     @GetMapping
     public List<Team> getAllTeams() {
-        return teamService.getAllTeams();
-    }
-
-    @PostMapping
-    public Team createTeam(@RequestBody Team team) {
-        return teamService.createTeam(team);
+        return teamRepository.findAll();
     }
 }

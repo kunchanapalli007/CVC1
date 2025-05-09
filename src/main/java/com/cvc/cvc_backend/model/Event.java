@@ -22,6 +22,7 @@ public class Event {
 
     private String result; // Optional field
 
+
     @ManyToOne
     @JoinColumn(name = "team1_id")
     private Team team1;
