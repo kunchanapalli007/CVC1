@@ -219,11 +219,15 @@
     <!-- Navbar -->
     <header class="bg-cvcDark text-white sticky top-0 z-50 shadow-lg">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 class="text-2xl font-bold text-cvcOrange animate__animated animate__fadeIn">🏐 CVC</h1>
+            <div class="flex items-center space-x-2">
+                <a href="index.html" class="flex items-center">
+                    <img src="logo.png" alt="Cincinnati Volleyball Club" class="h-10 hover:opacity-90 transition" />
+                    <span class="text-xl font-bold text-cvcOrange">Cincinnati Volleyball Club</span>
+                </a>
+            </div>
             <nav class="desktop-menu space-x-6 hidden md:flex">
                 <a href="index.html" class="text-white hover:text-cvcOrange nav-link">Home</a>
                 <a href="events.html" class="text-white hover:text-cvcOrange nav-link">Events</a>
-                <a href="about.html" class="text-white hover:text-cvcOrange nav-link">About</a>
                 <a href="contact.html" class="text-white hover:text-cvcOrange nav-link">Contact</a>
             </nav>
             <div class="md:hidden">
@@ -234,7 +238,6 @@
         <div id="mobile-menu" class="mobile-menu">
             <a href="index.html">Home</a>
             <a href="events.html">Events</a>
-            <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
         </div>
     </header>
