@@ -203,7 +203,7 @@
             eventCard.innerHTML = `
                 <div class="p-5">
                     <div class="flex justify-between items-start">
-                        <h3 class="text-xl font-bold text-cvcDark mb-2">${event.eventTitle}</h3>
+                        <h3 class="text-xl font-bold text-cvcDark mb-2">${event.title}</h3>
                         <button onclick="openDeleteModal(${event.id})" class="text-red-500 hover:text-red-700">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -225,14 +225,15 @@
     e.preventDefault();
 
     const newEvent = {
-        eventTitle: document.getElementById('eventTitle').value,
-        eventLocation: document.getElementById('eventLocation').value,
+        title: document.getElementById('eventTitle').value,
+        location: document.getElementById('eventLocation').value,
         eventDateTime: document.getElementById('eventDateTime').value,
-        team1Id: document.getElementById('team1Select').value, // Changed to team1Id
-        team2Id: document.getElementById('team2Select').value, // Changed to team2Id
-        eventType: document.getElementById('eventType').value,
-        eventResult: document.getElementById('eventResult').value
+        type: document.getElementById('eventType').value,
+        result: document.getElementById('eventResult').value,
+        team1: { id: document.getElementById('team1Select').value },
+        team2: { id: document.getElementById('team2Select').value }
     };
+
 
     try {
         const response = await fetch('/api/events', {

@@ -367,9 +367,15 @@
 
     // Load everything on page load
     document.addEventListener("DOMContentLoaded", () => {
+    // Always try to load events
+    loadEvents();
+
+    // Only load teams if dropdowns are present
+    if (document.getElementById("team1Select") && document.getElementById("team2Select")) {
         loadTeams();
-        loadEvents();
-    });
+    }
+});
+
 
     // Load teams into both dropdowns
     async function loadTeams() {
